@@ -700,6 +700,19 @@
         .game-option.is-correct { background: #159b6b; border-color: #6cf2be; }
         .game-option.is-wrong { background: #b8493a; border-color: #ffab9f; }
         .game-message { margin: 0.75rem 0 0; color: rgba(255, 255, 255, 0.86); font-size: 0.86rem; font-weight: 700; text-align: center; }
+        .vault-shell { max-width: 820px; margin: auto; padding: 1.5rem; border-radius: 14px; color: #e8fff7; background: radial-gradient(circle at 100% 0, #176e5f, transparent 35%), #092c2b; box-shadow: 0 28px 70px rgba(8,45,42,.25); }
+        .vault-shell h2, .vault-shell h3 { color: #fff; font-family: 'Bricolage Grotesque', sans-serif; }
+        .vault-screen { display: none; min-height: 330px; text-align: center; animation: vaultIn .45s ease; }
+        .vault-screen.is-active { display: grid; place-content: center; }
+        .vault-kicker, .vault-level { color: #75f6c7; font-size: .75rem; font-weight: 800; letter-spacing: .13em; }
+        .vault-btn { display: inline-flex; justify-content: center; gap: .5rem; padding: .8rem 1.1rem; border: 0; border-radius: 7px; background: #71f2c0; color: #083631; font-weight: 800; text-decoration: none; cursor: pointer; }
+        .vault-options { display: grid; gap: .55rem; width: min(100%,560px); margin: 1rem auto 0; }
+        .vault-options button { padding: .75rem 1rem; border: 1px solid rgba(255,255,255,.22); border-radius: 7px; background: rgba(255,255,255,.08); color: #fff; cursor: pointer; font-weight: 700; text-align: left; }
+        .vault-options .correct { background: #15825e; border-color: #71f2c0; }.vault-options .wrong { background: #9f403b; }
+        .vault-code { width: min(100%,560px); margin: 1rem auto; padding: 1rem; border-radius: 7px; background: #061e1e; color: #f8d889; font: .82rem/1.6 Consolas,monospace; text-align: left; white-space: pre-wrap; }
+        .vault-icons { margin: 1rem; font-size: 2.6rem; letter-spacing: .5rem; }.vault-skills { max-width: 600px; margin: 1rem auto; color: #b9f8dc; line-height: 2; }
+        .vault-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 1rem; }.vault-actions a:not(.vault-btn) { color: #dffef2; padding: .8rem; font-weight: 700; text-decoration: none; }
+        @keyframes vaultIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
         /* --- Hover States & Animations --- */
         .card:hover {
@@ -1015,29 +1028,31 @@
 
             <section class="section game-section" id="code-sprint">
                 <div class="container" data-reveal>
-                    <div class="card game-card">
-                        <div>
-                            <span class="eyebrow"><i class="fas fa-bug"></i> Quick visitor challenge</span>
-                            <h2>Debug Dash: spot the bug.</h2>
-                            <p class="game-copy">You have 30 seconds to solve five real coding puzzles. Every correct answer earns points—then share your developer score with friends.</p>
+                    <div class="vault-shell">
+                        <div class="vault-screen is-active" data-screen="intro">
+                            <p class="vault-kicker">⚠ ACCESS RESTRICTED</p>
+                            <h2>Welcome, Recruiter!</h2>
+                            <p>Only problem solvers can unlock Shubham Vishwakarma's secret developer vault. Complete 3 challenges to gain access.</p>
+                            <button class="vault-btn" type="button" data-action="start">Start Challenge <i class="fas fa-arrow-right"></i></button>
 
-                            <div class="game-scoreboard" aria-label="Debug Dash score board">
-                                <div><span>Score</span><strong id="game-score">0</strong></div>
-                                <div><span>Time</span><strong id="game-time">30s</strong></div>
-                                <div><span>Best</span><strong id="game-best">0</strong></div>
-                            </div>
-
-                            <div class="game-actions">
-                                <button class="btn btn-primary" id="game-start" type="button"><i class="fas fa-play"></i> Start Debug Dash</button>
-                                <button class="btn btn-secondary" id="game-share" type="button" disabled><i class="fas fa-share-nodes"></i> Share Score</button>
-                            </div>
+                        <div class="vault-screen" data-screen="level-1">
+                            <span class="vault-level">LEVEL 01 · +100 XP</span><h3>Find The Bug</h3><p>Why is <code>undefined</code> printed?</p>
+                            <pre class="vault-code">const skills = ["HTML", "CSS", "JavaScript"];&#10;&#10;for (let i = 0; i &lt;= skills.length; i++) {&#10;  console.log(skills[i]);&#10;}</pre>
+                            <div class="vault-options"><button type="button">A. Wrong array</button><button type="button" data-correct="true">B. Wrong loop condition</button><button type="button">C. Missing semicolon</button></div>
                         </div>
-
-                        <div class="game-arena" id="game-arena" aria-label="Debug Dash game area">
-                            <p class="game-question" id="game-question">Ready to test your bug-hunting skills?</p>
-                            <pre class="game-code" id="game-code">Click “Start Debug Dash” to receive your first challenge.</pre>
-                            <div class="game-options" id="game-options"></div>
-                            <p class="game-message" id="game-message" aria-live="polite">Find the bug, earn your score, and challenge a friend.</p>
+                        <div class="vault-screen" data-screen="level-2">
+                            <span class="vault-level">LEVEL 02 · +200 XP</span><h3>Decode The Stack</h3><p>Which stack do these symbols represent?</p><div class="vault-icons">🌐 ⚡ 🟩 🗄️</div>
+                            <div class="vault-options"><button type="button" data-correct="true">HTML + CSS + JavaScript + Node.js + MySQL</button><button type="button">Python + Django + React + MongoDB</button><button type="button">Java + Spring + Oracle + AWS</button></div>
+                        </div>
+                        <div class="vault-screen" data-screen="level-3">
+                            <span class="vault-level">LEVEL 03 · +300 XP</span><h3>Escape The Error</h3><p>What should you check first?</p><pre class="vault-code">$ npm start&#10;Error: Cannot connect to database</pre>
+                            <div class="vault-options"><button type="button">Restart PC</button><button type="button" data-correct="true">Check DB Connection String</button><button type="button">Reinstall Chrome</button></div>
+                        </div>
+                        <div class="vault-screen" data-screen="unlocked">
+                            <p class="vault-kicker">🎉 ACCESS GRANTED · RECRUITER SCORE: 600 XP</p><h2>Hi, I'm Shubham Vishwakarma</h2><p>Full Stack Developer · B.Sc IT Graduate</p>
+                            <div class="vault-skills">✓ HTML &nbsp; ✓ CSS &nbsp; ✓ JavaScript &nbsp; ✓ Node.js &nbsp; ✓ Express.js &nbsp; ✓ MySQL &nbsp; ✓ Git & GitHub</div>
+                            <p>Mission Complete 🚀<br>You debugged code. You solved problems. You unlocked the vault.<br><strong>Now imagine what I can build for your company.</strong></p>
+                            <div class="vault-actions"><a href="mailto:shubhvish9004@gmail.com?subject=Hiring%20Inquiry" class="vault-btn">Hire Shubham</a><a href="https://github.com/shubhwithcode" target="_blank" rel="noopener">View GitHub</a><a href="https://www.linkedin.com/in/shubhwithcode" target="_blank" rel="noopener">Connect on LinkedIn</a></div>
                         </div>
                     </div>
                 </div>
@@ -1125,6 +1140,7 @@
             <div class="container">
                 <a href="#home" class="logo" style="margin-bottom: 1rem;"><img src="assets/photo.jpeg" alt="Shubham Vishwakarma"><span>Shubham</span></a>
                 <p style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2026 Shubham Brijesh Vishwakarma. All rights reserved.</p>
+                <p style="color: var(--text-dim); font: 0.75rem Consolas, monospace;">console.log("Looking for secrets?");</p>
             </div>
         </footer>
     </div>
@@ -1167,7 +1183,8 @@
                 revealObserver.observe(reveal);
             });
 
-            // Debug Dash Game
+            if (document.querySelector('#game-start')) {
+            // Legacy Debug Dash Game
             const gameStart = document.querySelector('#game-start');
             const gameShare = document.querySelector('#game-share');
             const gameQuestion = document.querySelector('#game-question');
@@ -1307,6 +1324,37 @@
                     if (error.name !== 'AbortError') gameMessage.textContent = 'Could not share right now. Please try again.';
                 }
             });
+            }
+
+            // ShubhWithCode Vault Challenge
+            const vault = document.querySelector('.vault-shell');
+            if (vault) {
+                const screens = vault.querySelectorAll('.vault-screen');
+                const xp = [100, 200, 300];
+                let vaultXp = 0;
+                const showVaultScreen = (name) => {
+                    screens.forEach((screen) => screen.classList.toggle('is-active', screen.dataset.screen === name));
+                };
+                vault.querySelector('[data-action="start"]').addEventListener('click', () => showVaultScreen('level-1'));
+                vault.querySelectorAll('.vault-options').forEach((options, levelIndex) => {
+                    options.querySelectorAll('button').forEach((button) => {
+                        button.addEventListener('click', () => {
+                            if (options.dataset.locked) return;
+                            options.dataset.locked = 'true';
+                            options.querySelectorAll('button').forEach((item) => item.disabled = true);
+                            if (button.dataset.correct === 'true') {
+                                button.classList.add('correct');
+                                vaultXp += xp[levelIndex];
+                            } else {
+                                button.classList.add('wrong');
+                                options.querySelector('[data-correct="true"]').classList.add('correct');
+                            }
+                            setTimeout(() => showVaultScreen(levelIndex === 2 ? 'unlocked' : 'level-' + (levelIndex + 2)), 900);
+                        });
+                    });
+                });
+                console.log('🎉 Secret Found! Here is a bonus project: Ask Shubham about the next product he is building.');
+            }
         });
     </script>
 </body>
