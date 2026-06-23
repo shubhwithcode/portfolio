@@ -659,6 +659,48 @@
             font-weight: 600;
         }
 
+        /* --- Code Sprint Game --- */
+        .game-section { overflow: hidden; }
+        .game-card {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: radial-gradient(circle at 8% 10%, rgba(232, 93, 63, 0.14), transparent 26%), linear-gradient(135deg, #173d3a, #0f766e);
+            color: #fff;
+            border: 0;
+            box-shadow: 0 24px 60px rgba(15, 118, 110, 0.22);
+        }
+        .game-card:hover { transform: none; border-color: transparent; }
+        .game-card .eyebrow, .game-card .mini-metric { color: #b9f2df; }
+        .game-card h2 { margin: 0.35rem 0 0.75rem; font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; }
+        .game-copy { color: rgba(255, 255, 255, 0.78); max-width: 33rem; margin: 0; }
+        .game-scoreboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin: 1.3rem 0; }
+        .game-scoreboard div { padding: 0.75rem; border-radius: 8px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.12); }
+        .game-scoreboard span { display: block; color: #c5e8df; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+        .game-scoreboard strong { display: block; margin-top: 0.12rem; font-size: 1.5rem; }
+        .game-actions { display: flex; flex-wrap: wrap; gap: 0.65rem; }
+        .game-actions .btn { border: 0; cursor: pointer; font: inherit; }
+        .game-actions .btn-primary { background: #fff; color: var(--primary); box-shadow: none; }
+        .game-actions .btn-secondary { color: #fff; border: 1px solid rgba(255, 255, 255, 0.38); }
+        .game-actions .btn-secondary:hover { border-color: #fff; color: #fff; }
+        .game-arena {
+            position: relative; min-height: 255px; overflow: hidden; border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px), rgba(6, 47, 45, 0.48);
+            background-size: 28px 28px;
+        }
+        .game-arena::before { content: 'CLICK THE SIGNALS'; position: absolute; top: 1rem; left: 1rem; color: rgba(255, 255, 255, 0.35); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; }
+        .game-target {
+            position: absolute; display: none; place-items: center; width: 3.5rem; height: 3.5rem; padding: 0;
+            border: 3px solid #fff; border-radius: 50%; background: var(--accent); color: #fff; cursor: pointer;
+            box-shadow: 0 0 0 7px rgba(232, 93, 63, 0.22), 0 10px 22px rgba(0, 0, 0, 0.25); animation: targetPulse 1s ease-in-out infinite;
+        }
+        .game-target.is-active { display: grid; }
+        .game-target:focus-visible { outline: 3px solid #f3b23c; outline-offset: 4px; }
+        .game-message { position: absolute; right: 1rem; bottom: 0.85rem; left: 1rem; margin: 0; color: rgba(255, 255, 255, 0.86); font-size: 0.86rem; font-weight: 700; text-align: center; }
+        @keyframes targetPulse { 50% { transform: scale(1.08); } }
+
         /* --- Hover States & Animations --- */
         .card:hover {
             transform: translateY(-5px);
@@ -690,6 +732,7 @@
         /* --- Media Queries --- */
         @media (max-width: 980px) {
             .hero-grid, .skills-layout { grid-template-columns: 1fr; }
+            .game-card { grid-template-columns: 1fr; }
             .hero-copy { max-width: none; }
             .hero-aside { max-width: 520px; }
             .stats-grid, .education-grid, .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -725,6 +768,10 @@
             .education-grid, .project-grid, .stats-grid {
                 grid-template-columns: 1fr;
             }
+
+            .game-scoreboard div { padding: 0.6rem; }
+            .game-scoreboard strong { font-size: 1.25rem; }
+            .game-arena { min-height: 230px; }
 
             .hero-copy h1 {
                 font-size: clamp(2.35rem, 10.5vw, 3.2rem);
@@ -966,6 +1013,34 @@
                 </div>
             </section>
 
+            <section class="section game-section" id="code-sprint">
+                <div class="container" data-reveal>
+                    <div class="card game-card">
+                        <div>
+                            <span class="eyebrow"><i class="fas fa-bolt"></i> Quick visitor challenge</span>
+                            <h2>Can you catch every code signal?</h2>
+                            <p class="game-copy">You have 20 seconds. Click each signal as it appears, beat your personal best, and share your score with friends.</p>
+
+                            <div class="game-scoreboard" aria-label="Code Sprint score board">
+                                <div><span>Score</span><strong id="game-score">0</strong></div>
+                                <div><span>Time</span><strong id="game-time">20s</strong></div>
+                                <div><span>Best</span><strong id="game-best">0</strong></div>
+                            </div>
+
+                            <div class="game-actions">
+                                <button class="btn btn-primary" id="game-start" type="button"><i class="fas fa-play"></i> Start Challenge</button>
+                                <button class="btn btn-secondary" id="game-share" type="button" disabled><i class="fas fa-share-nodes"></i> Share Score</button>
+                            </div>
+                        </div>
+
+                        <div class="game-arena" id="game-arena" aria-label="Code Sprint game area">
+                            <button class="game-target" id="game-target" type="button" aria-label="Catch code signal"><i class="fas fa-code"></i></button>
+                            <p class="game-message" id="game-message" aria-live="polite">Press Start Challenge to play.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="section" id="projects" style="background: rgba(15, 118, 110, 0.03);">
                 <div class="container" data-reveal>
                     <div class="section-head">
@@ -1088,6 +1163,107 @@
 
             reveals.forEach(reveal => {
                 revealObserver.observe(reveal);
+            });
+
+            // Code Sprint Game
+            const gameStart = document.querySelector('#game-start');
+            const gameShare = document.querySelector('#game-share');
+            const gameTarget = document.querySelector('#game-target');
+            const gameArena = document.querySelector('#game-arena');
+            const gameScoreElement = document.querySelector('#game-score');
+            const gameTimeElement = document.querySelector('#game-time');
+            const gameBestElement = document.querySelector('#game-best');
+            const gameMessage = document.querySelector('#game-message');
+            let gameScore = 0;
+            let gameTime = 20;
+            let gameTimer;
+            let gameActive = false;
+            let gameBest = 0;
+
+            try {
+                gameBest = Number(localStorage.getItem('codeSprintBest')) || 0;
+            } catch (error) {
+                gameBest = 0;
+            }
+            gameBestElement.textContent = gameBest;
+
+            const moveTarget = () => {
+                const targetSize = 56;
+                const padding = 12;
+                const maxX = Math.max(padding, gameArena.clientWidth - targetSize - padding);
+                const maxY = Math.max(padding, gameArena.clientHeight - targetSize - padding);
+                gameTarget.style.left = (padding + Math.random() * (maxX - padding)) + 'px';
+                gameTarget.style.top = (padding + Math.random() * (maxY - padding)) + 'px';
+            };
+
+            const updateGameStats = () => {
+                gameScoreElement.textContent = gameScore;
+                gameTimeElement.textContent = gameTime + 's';
+            };
+
+            const finishGame = () => {
+                clearInterval(gameTimer);
+                gameActive = false;
+                gameTarget.classList.remove('is-active');
+                gameShare.disabled = false;
+                gameStart.innerHTML = '<i class="fas fa-rotate-right"></i> Play Again';
+
+                if (gameScore > gameBest) {
+                    gameBest = gameScore;
+                    gameBestElement.textContent = gameBest;
+                    try {
+                        localStorage.setItem('codeSprintBest', gameBest);
+                    } catch (error) {
+                        // The game works even if the browser blocks storage.
+                    }
+                    gameMessage.textContent = 'New personal best! You caught ' + gameScore + ' signals.';
+                } else {
+                    gameMessage.textContent = 'Time up! You caught ' + gameScore + ' signals. Try again?';
+                }
+            };
+
+            gameStart.addEventListener('click', () => {
+                clearInterval(gameTimer);
+                gameScore = 0;
+                gameTime = 20;
+                gameActive = true;
+                gameShare.disabled = true;
+                updateGameStats();
+                gameStart.innerHTML = '<i class="fas fa-bolt"></i> Challenge Running';
+                gameMessage.textContent = 'Go! Catch as many signals as you can.';
+                gameTarget.classList.add('is-active');
+                moveTarget();
+
+                gameTimer = setInterval(() => {
+                    gameTime -= 1;
+                    updateGameStats();
+                    if (gameTime <= 0) finishGame();
+                }, 1000);
+            });
+
+            gameTarget.addEventListener('click', () => {
+                if (!gameActive) return;
+                gameScore += 1;
+                gameScoreElement.textContent = gameScore;
+                gameMessage.textContent = 'Nice! Keep the momentum going.';
+                moveTarget();
+            });
+
+            gameShare.addEventListener('click', async () => {
+                const shareText = 'I caught ' + gameScore + ' code signals in Shubham Vishwakarma\'s Code Sprint. Can you beat my score?';
+                try {
+                    if (navigator.share) {
+                        await navigator.share({ title: 'My Code Sprint Score', text: shareText, url: window.location.href });
+                        gameMessage.textContent = 'Score shared — challenge sent!';
+                    } else if (navigator.clipboard) {
+                        await navigator.clipboard.writeText(shareText + ' ' + window.location.href);
+                        gameMessage.textContent = 'Score copied — paste it anywhere to challenge a friend.';
+                    } else {
+                        gameMessage.textContent = shareText;
+                    }
+                } catch (error) {
+                    if (error.name !== 'AbortError') gameMessage.textContent = 'Could not share right now. Please try again.';
+                }
             });
         });
     </script>
