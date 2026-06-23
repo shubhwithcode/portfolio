@@ -143,12 +143,25 @@
         }
 
         .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: 0;
             text-decoration: none;
             color: var(--text);
+        }
+
+        .logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 2px solid rgba(15, 118, 110, 0.18);
+            box-shadow: 0 8px 18px rgba(23, 33, 31, 0.12);
         }
 
         .logo span {
@@ -768,7 +781,7 @@
     <div class="page-shell">
         <nav class="site-nav">
             <div class="nav-inner">
-                <a href="#home" class="logo">SHUBHAM<span>.</span></a>
+                <a href="#home" class="logo"><img src="assets/photo.jpeg" alt="Shubham Vishwakarma"><span>Shubham</span></a>
                 <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1012,7 +1025,7 @@
 
         <footer class="site-footer" style="padding: 3rem 0 2rem; text-align: center; border-top: 1px solid rgba(21, 71, 52, 0.1); margin-top: 2rem;">
             <div class="container">
-                <a href="#home" class="logo" style="display: inline-block; margin-bottom: 1rem;">SHUBHAM<span>.</span></a>
+                <a href="#home" class="logo" style="margin-bottom: 1rem;"><img src="assets/photo.jpeg" alt="Shubham Vishwakarma"><span>Shubham</span></a>
                 <p style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2026 Shubham Brijesh Vishwakarma. All rights reserved.</p>
             </div>
         </footer>

@@ -109,10 +109,23 @@ img {
 }
 
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
     font-size: 1.4rem;
     font-weight: 800;
     letter-spacing: 0;
     color: var(--primary);
+}
+
+.logo img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid rgba(19, 121, 91, 0.18);
+    box-shadow: 0 8px 18px rgba(18, 47, 38, 0.12);
 }
 
 .logo span {
