@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Shubham Vishwakarma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .intro-grid,
+        .highlights-grid,
+        .focus-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .intro-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: start;
+        }
+
+        .intro-card,
+        .info-card,
+        .timeline-item,
+        .focus-card {
+            padding: 1.5rem;
+        }
+
+        .intro-card p,
+        .timeline-item p,
+        .focus-card p,
+        .info-card p {
+            color: var(--text-dim);
+        }
+
+        .highlights-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 1.5rem;
+        }
+
+        .info-card i,
+        .focus-card i {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            border-left: 3px solid rgba(15, 118, 110, 0.35);
+        }
+
+        .timeline-item span {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .focus-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 2rem;
+        }
+
+        .cta-box {
+            padding: 1.75rem;
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (max-width: 980px) {
+            .intro-grid,
+            .focus-grid,
+            .highlights-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .intro-grid,
+            .focus-grid,
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a href="index.html" class="logo">SHUBHAM<span>.</span></a>
+                <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="projects.html">Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="section">
+            <div class="container">
+                <p class="eyebrow">About me</p>
+                <h1 class="section-title">Shubham Vishwakarma, a <span class="gradient-text">B.Sc IT graduate</span> building practical web projects.</h1>
+
+                <div class="intro-grid" style="margin-top: 2rem;">
+                    <article class="card intro-card">
+                        <h2 style="margin-bottom: 1rem;">A developer growing through real projects</h2>
+                        <p>Hello, I'm <strong>Shubham Vishwakarma</strong>. I completed <strong>B.Sc IT in 2026</strong> with a <strong>9.5 CGPA</strong> in <strong>Maharashtra, Mumbai</strong>.</p>
+                        <p style="margin-top: 1rem;">My academic journey and project work help me approach development with patience, structure, and a strong focus on building things that are actually useful.</p>
+                        <div class="timeline">
+                            <div class="card timeline-item">
+                                <span>Started with curiosity</span>
+                                <h3>Learning how the web works</h3>
+                                <p>I began by exploring page structure, design systems, and how websites communicate with users.</p>
+                            </div>
+                            <div class="card timeline-item">
+                                <span>Built practical projects</span>
+                                <h3>Turning ideas into usable tools</h3>
+                                <p>From local business concepts to admin dashboards, I focused on interfaces that are easy to use and maintain.</p>
+                            </div>
+                            <div class="card timeline-item">
+                                <span>Now</span>
+                                <h3>Growing into full-stack delivery</h3>
+                                <p>I am improving both frontend presentation and backend functionality so projects become more complete and production-ready.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <aside>
+                        <div class="highlights-grid">
+                            <div class="card info-card">
+                                <i class="fas fa-location-dot"></i>
+                                <h3>Location</h3>
+                                <p>Mumbai, Maharashtra</p>
+                            </div>
+                            <div class="card info-card">
+                                <i class="fas fa-graduation-cap"></i>
+                                <h3>Education</h3>
+                                <p>B.Sc IT Completed, 2026</p>
+                            </div>
+                            <div class="card info-card">
+                                <i class="fab fa-github"></i>
+                                <h3>GitHub</h3>
+                                <p><a href="https://github.com/shubhwithcode" target="_blank" rel="noopener">/shubhwithcode</a></p>
+                            </div>
+                            <div class="card info-card">
+                                <i class="fab fa-linkedin"></i>
+                                <h3>LinkedIn</h3>
+                                <p><a href="https://www.linkedin.com/in/shubhwithcode" target="_blank" rel="noopener">/shubhwithcode</a></p>
+                            </div>
+                            <div class="card info-card">
+                                <i class="fas fa-language"></i>
+                                <h3>Languages</h3>
+                                <p>Hindi and English</p>
+                            </div>
+                            <div class="card info-card">
+                                <i class="fas fa-briefcase"></i>
+                                <h3>Focus</h3>
+                                <p>Full-stack web projects</p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+
+        <section class="section" style="padding-top: 0;">
+            <div class="container">
+                <h2 class="section-title">What I bring to a <span class="gradient-text">project</span></h2>
+                <div class="focus-grid">
+                    <article class="card focus-card">
+                        <i class="fas fa-pen-ruler"></i>
+                        <h3>Clean UI Thinking</h3>
+                        <p>Layouts that feel modern, balanced, and easy to understand on any device.</p>
+                    </article>
+                    <article class="card focus-card">
+                        <i class="fas fa-gears"></i>
+                        <h3>Practical Development</h3>
+                        <p>Features that solve real workflow needs instead of adding complexity for no reason.</p>
+                    </article>
+                    <article class="card focus-card">
+                        <i class="fas fa-handshake-angle"></i>
+                        <h3>Reliable Collaboration</h3>
+                        <p>Clear communication, honest progress, and a steady approach to iteration.</p>
+                    </article>
+                </div>
+
+                <div class="card cta-box">
+                    <div>
+                        <h3 style="margin-bottom: 0.5rem;">Want to work together on your next website or dashboard?</h3>
+                        <p class="section-copy">Let's discuss the idea and shape it into something people can actually use.</p>
+                    </div>
+                    <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p>&copy; 2026 Shubham Vishwakarma.</p>
+                <p>Developer, learner, and builder of useful web experiences.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>

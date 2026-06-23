@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubham Vishwakarma | Full-Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Base Variables & Global Styles --- */
+        :root {
+            --primary: #0f766e;
+            --secondary: #243b53;
+            --accent: #e85d3f;
+            --gold: #f3b23c;
+            --text: #17211f;
+            --text-dim: #60706c;
+            --shadow-soft: 0 18px 45px rgba(23, 33, 31, 0.1);
+            --bg-color: #fbfaf7;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background:
+                linear-gradient(135deg, rgba(15, 118, 110, 0.1), transparent 30%),
+                linear-gradient(225deg, rgba(232, 93, 63, 0.1), transparent 28%),
+                linear-gradient(180deg, #fffdfa 0%, #fbfaf7 48%, #eef7f4 100%);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid rgba(21, 71, 52, 0.12);
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(15, 118, 110, 0.08);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 24px rgba(15, 118, 110, 0.22);
+        }
+
+        .btn-primary:hover {
+            background: #0f664d;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(21, 71, 52, 0.16);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            margin: 0 0 1rem;
+        }
+
+        /* --- Navigation --- */
+        .site-nav {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(21, 71, 52, 0.1);
+            background: rgba(247, 250, 248, 0.82);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        /* --- Layout & Component Styles --- */
+        .hero,
+        .profile-strip,
+        .skills-layout,
+        .education-grid,
+        .services-grid,
+        .project-grid {
+            position: relative;
+        }
+
+        .hero {
+            min-height: calc(100vh - 76px);
+            display: grid;
+            align-items: center;
+            padding: 3.5rem 0 2.5rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-copy {
+            position: relative;
+            padding: 0;
+            max-width: 46rem;
+        }
+
+        .hero-copy::before {
+            content: "";
+            position: absolute;
+            top: -1.25rem;
+            left: -1.25rem;
+            width: 5.5rem;
+            height: 5.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(15, 118, 110, 0.16);
+            background: rgba(15, 118, 110, 0.08);
+            z-index: -1;
+            transform: rotate(-8deg);
+        }
+
+        .hero-copy h1 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            line-height: 0.88;
+            letter-spacing: 0;
+            max-width: 11ch;
+            text-wrap: balance;
+            margin: 0 0 1rem;
+        }
+
+        .hero-copy p {
+            max-width: 40rem;
+            color: var(--text-dim);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .hero-meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0;
+            margin-bottom: 1rem;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .hero-meta-dot {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 7px rgba(232, 93, 63, 0.12);
+        }
+
+        .hero-role {
+            margin: 0;
+            color: var(--secondary);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .hero-name-line {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.9rem;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .hero-name-line::before {
+            content: "";
+            width: 2.4rem;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .hero-note,
+        .mini-metric,
+        .project-kicker {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.72rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .hero-summary {
+            position: relative;
+            max-width: 26rem;
+            padding: 0;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-summary::before {
+            display: none;
+        }
+
+        .hero-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            margin: 0 0 1.15rem;
+        }
+
+        .hero-contact a,
+        .hero-contact span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.58rem 0.82rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid rgba(36, 59, 83, 0.1);
+            color: var(--text);
+            font-size: 0.8rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(18, 47, 38, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .hero-contact a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .hero-actions,
+        .pill-row,
+        .profile-strip,
+        .stats-grid,
+        .value-grid,
+        .skills-layout,
+        .education-grid,
+        .project-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .hero-actions {
+            grid-template-columns: repeat(2, minmax(0, max-content));
+            margin-bottom: 1.25rem;
+        }
+
+        .pill-row {
+            grid-template-columns: repeat(2, minmax(0, max-content));
+            gap: 0.7rem;
+            align-items: start;
+        }
+
+        .hero-mini-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.2rem;
+        }
+
+        .hero-mini-stack span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(36, 59, 83, 0.1);
+            color: var(--text);
+            font-size: 0.86rem;
+            font-weight: 700;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 0 0 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.58rem 0.82rem;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.08);
+            color: var(--primary);
+            font-size: 0.82rem;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid rgba(15, 118, 110, 0.12);
+            transition: all 0.25s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Right Hero Aside --- */
+        .hero-aside {
+            display: grid;
+            gap: 1rem;
+            align-self: stretch;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .photo-frame {
+            position: relative;
+            padding: 0.75rem;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid rgba(36, 59, 83, 0.12);
+            box-shadow: 0 24px 70px rgba(23, 33, 31, 0.14);
+        }
+
+        .hero-photo {
+            aspect-ratio: 4 / 5;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #fffdfa, #edf4ef);
+            transition: transform 0.4s ease;
+        }
+
+        .photo-frame:hover .hero-photo {
+            transform: scale(1.03);
+        }
+
+        .photo-badge {
+            position: absolute;
+            left: 1.1rem;
+            right: 1.1rem;
+            bottom: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.65rem 0.8rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(21, 71, 52, 0.12);
+            backdrop-filter: blur(14px);
+        }
+
+        .photo-badge i {
+            display: grid;
+            place-items: center;
+            width: 2.1rem;
+            height: 2.1rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            color: #fff;
+            font-size: 0.82rem;
+        }
+
+        .hero-panel {
+            padding: 1rem 1.1rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .hero-panel-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: start;
+            margin-bottom: 0.7rem;
+        }
+
+        .status-badge {
+            padding: 0.45rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(15, 118, 110, 0.1);
+            color: var(--secondary);
+            font-weight: 700;
+            white-space: nowrap;
+            border: 1px solid rgba(21, 71, 52, 0.1);
+            font-size: 0.78rem;
+        }
+
+        .signal-board {
+            margin-top: 0.8rem;
+            padding: 0.85rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px dashed rgba(21, 71, 52, 0.16);
+        }
+
+        .signal-board ul {
+            list-style: none;
+            display: grid;
+            gap: 0.5rem;
+            margin-top: 0.55rem;
+            padding: 0;
+        }
+
+        .signal-board li {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dim);
+            font-size: 0.84rem;
+        }
+
+        .signal-board li strong {
+            color: var(--text);
+        }
+
+        /* --- Grids & Layouts --- */
+        .profile-strip {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 2rem;
+        }
+
+        .value-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 2rem;
+        }
+
+        .skills-layout {
+            grid-template-columns: 1.1fr 0.9fr;
+            margin-top: 2rem;
+        }
+
+        .education-grid, .project-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            margin-top: 2rem;
+        }
+
+        .profile-card, .stat-card, .value-card, .skill-card, .education-card, .project-card {
+            padding: 1.5rem;
+        }
+
+        .profile-card {
+            padding: 1.25rem;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(246, 250, 247, 0.88));
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 2.4rem;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 1rem;
+            align-items: start;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(21, 71, 52, 0.08);
+        }
+
+        .skill-row:first-child { border-top: 0; padding-top: 0; }
+        .skill-row span { font-weight: 700; color: var(--secondary); }
+        .skill-row p { margin: 0; }
+
+        .availability-points {
+            display: grid;
+            gap: 0.9rem;
+            margin-top: 1.25rem;
+        }
+
+        .availability-points div {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            color: var(--text-dim);
+        }
+
+        .availability-points i { color: var(--secondary); }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .project-card i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            padding: 0.4rem 0.75rem;
+            border-radius: 8px;
+            background: rgba(15, 118, 110, 0.1);
+            color: var(--secondary);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* --- Hover States & Animations --- */
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(21, 71, 52, 0.2);
+        }
+
+        .floating-card {
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        [data-reveal="left"] { transform: translateX(-28px); }
+        [data-reveal="right"] { transform: translateX(28px); }
+        [data-reveal].is-visible {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 980px) {
+            .hero-grid, .skills-layout { grid-template-columns: 1fr; }
+            .hero-copy { max-width: none; }
+            .hero-aside { max-width: 520px; }
+            .stats-grid, .education-grid, .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .profile-strip { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 2rem 0 1.5rem;
+            }
+
+            .hero-grid {
+                gap: 1.5rem;
+            }
+
+            .hero-copy::before {
+                width: 4rem;
+                height: 4rem;
+                left: -0.5rem;
+            }
+
+            .hero-actions, .pill-row, .value-grid, .profile-strip, 
+            .education-grid, .project-grid, .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy h1 {
+                font-size: clamp(2.35rem, 10.5vw, 3.2rem);
+                line-height: 0.95;
+                max-width: 12ch;
+                margin-bottom: 0.85rem;
+            }
+
+            .hero-name-line {
+                font-size: 0.94rem;
+                margin-bottom: 0.7rem;
+            }
+
+            .hero-summary {
+                max-width: none;
+                font-size: 0.95rem;
+            }
+
+            .hero-contact {
+                flex-direction: column;
+            }
+
+            .hero-actions {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .social-links {
+                gap: 0.5rem;
+            }
+
+            .hero-actions .btn {
+                padding-inline: 0.7rem;
+                min-height: 46px;
+            }
+
+            .hero-mini-stack {
+                gap: 0.5rem;
+            }
+
+            .hero-mini-stack span {
+                font-size: 0.78rem;
+                padding: 0.5rem 0.6rem;
+            }
+
+            .hero .profile-strip {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.55rem;
+                margin-top: 1.25rem;
+            }
+
+            .hero .profile-card {
+                padding: 0.75rem;
+            }
+
+            .hero .profile-card strong {
+                font-size: 0.85rem !important;
+            }
+
+            .hero .mini-metric {
+                font-size: 0.56rem;
+                letter-spacing: 0.08em;
+            }
+
+            .hero-photo {
+                aspect-ratio: 1 / 1;
+                object-position: center top;
+            }
+
+            .photo-badge { position: static; margin-top: 0.9rem; }
+            .skill-row { grid-template-columns: 1fr; gap: 0.35rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a href="#home" class="logo">SHUBHAM<span>.</span></a>
+                <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#projects">Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main>
+            <section class="hero" id="home">
+                <div class="container hero-grid">
+                    <div class="hero-copy" data-reveal="left">
+                        <div class="hero-meta">
+                            <span class="hero-meta-dot"></span>
+                            <p class="hero-role">Fresher Software Developer</p>
+                        </div>
+                        <div class="hero-name-line">Shubham Brijesh Vishwakarma</div>
+                        <h1 class="section-title">Building clean web apps with practical code.</h1>
+                        <p class="hero-summary">BSc IT graduate from Mumbai focused on responsive websites, useful dashboards, and full-stack fundamentals.</p>
+                        
+                        <div class="hero-contact">
+                            <a href="tel:9137666909"><i class="fas fa-phone"></i> 9137666909</a>
+                            <a href="mailto:shubhvish9004@gmail.com"><i class="fas fa-envelope"></i> shubhvish9004@gmail.com</a>
+                            <span><i class="fas fa-location-dot"></i> Bhayandar West, Mumbai</span>
+                        </div>
+
+                        <div class="social-links" aria-label="Social links">
+                            <a href="https://www.linkedin.com/in/shubhwithcode" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                            <a href="https://github.com/shubhwithcode" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a>
+                        </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#projects" class="btn btn-primary">See My Work</a>
+                            <a href="mailto:shubhvish9004@gmail.com" class="btn btn-secondary">Contact Me</a>
+                        </div>
+                        
+                        <div class="hero-mini-stack">
+                            <span><i class="fas fa-code"></i> HTML CSS JS</span>
+                            <span><i class="fas fa-server"></i> Node Express</span>
+                            <span><i class="fas fa-database"></i> MySQL</span>
+                            <span><i class="fab fa-github"></i> GitHub</span>
+                        </div>
+
+                        <div class="profile-strip">
+                            <article class="card profile-card" data-reveal>
+                                <span class="mini-metric">Education</span>
+                                <strong style="display: block; font-size: 1.1rem; margin-top: 4px;">BSc IT 2026</strong>
+                            </article>
+                            <article class="card profile-card" data-reveal>
+                                <span class="mini-metric">Academic Score</span>
+                                <strong style="display: block; font-size: 1.1rem; margin-top: 4px;">CGPA 9.5</strong>
+                            </article>
+                            <article class="card profile-card" data-reveal>
+                                <span class="mini-metric">Strength</span>
+                                <strong style="display: block; font-size: 1.1rem; margin-top: 4px;">Quick Learner</strong>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="hero-aside">
+                        <div class="hero-visual" data-reveal="right">
+                            <div class="photo-frame floating-card">
+                                <img src="assets/photo.jpeg" alt="Portrait" class="hero-photo">
+                                <div class="photo-badge">
+                                    <i class="fas fa-rocket"></i>
+                                    <div>
+                                        <strong style="margin-bottom: 2px;">Open to Opportunities</strong>
+                                        <span style="color: var(--text-dim); font-size: 0.8rem;">Fresher developer from Mumbai</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hero-panel card" data-reveal="right">
+                            <div class="hero-panel-top">
+                                <div>
+                                    <p class="eyebrow">Professional summary</p>
+                                    <h3 style="margin: 0;">Eager to apply skills and grow in real-world environments.</h3>
+                                </div>
+                                <span class="status-badge">Fresher</span>
+                            </div>
+                            <p style="color: var(--text-dim);">I am strengthening my fundamentals in programming, web technologies, and logical thinking while building projects that solve practical needs.</p>
+                            
+                            <div class="signal-board">
+                                <span class="mini-metric">Career snapshot</span>
+                                <ul>
+                                    <li><span>Primary focus</span><strong>Web Development</strong></li>
+                                    <li><span>Programming</span><strong>C, C++, Python</strong></li>
+                                    <li><span>Profiles</span><strong>@shubhwithcode</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" style="background: rgba(15, 118, 110, 0.03);">
+                <div class="container" data-reveal>
+                    <div class="section-head">
+                        <div>
+                            <h2 class="section-title">Profile at a <span class="gradient-text">glance</span></h2>
+                            <p style="color: var(--text-dim); max-width: 600px;">A quick summary of my completed degree, academic performance, and the areas where I am actively building experience.</p>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="card stat-card"><strong>2026</strong><span style="color: var(--text-dim);">BSc IT completed</span></div>
+                        <div class="card stat-card"><strong>9.5</strong><span style="color: var(--text-dim);">BSc IT CGPA</span></div>
+                        <div class="card stat-card"><strong>3+</strong><span style="color: var(--text-dim);">Portfolio projects</span></div>
+                        <div class="card stat-card"><strong>Full-stack</strong><span style="color: var(--text-dim);">Learning focus</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="skills">
+                <div class="container" data-reveal>
+                    <h2 class="section-title">Technical <span class="gradient-text">skills</span></h2>
+                    <div class="skills-layout">
+                        <article class="card skill-card">
+                            <p class="eyebrow">Core stack</p>
+                            <h3 style="margin-top: 0;">Technologies I am working with right now</h3>
+                            <div style="margin-top: 1.5rem;">
+                                <div class="skill-row">
+                                    <span>Languages</span>
+                                    <p>C, C++, Python</p>
+                                </div>
+                                <div class="skill-row">
+                                    <span>Frontend</span>
+                                    <p>HTML, CSS, JavaScript</p>
+                                </div>
+                                <div class="skill-row">
+                                    <span>Backend</span>
+                                    <p>Node.js, Express.js (Basic)</p>
+                                </div>
+                                <div class="skill-row">
+                                    <span>Database</span>
+                                    <p>MySQL</p>
+                                </div>
+                                <div class="skill-row">
+                                    <span>Tools</span>
+                                    <p>Git, GitHub, VS Code</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="card skill-card">
+                            <p class="eyebrow">Strengths</p>
+                            <h3 style="margin-top: 0;">How I approach learning and work</h3>
+                            <div class="availability-points">
+                                <div><i class="fas fa-circle-check"></i> Problem-solving and logical thinking</div>
+                                <div><i class="fas fa-circle-check"></i> Quick learner and self-motivated</div>
+                                <div><i class="fas fa-circle-check"></i> Strong interest in software engineering</div>
+                                <div><i class="fas fa-circle-check"></i> Responsive UI mindset for mobile and desktop</div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="projects" style="background: rgba(15, 118, 110, 0.03);">
+                <div class="container" data-reveal>
+                    <div class="section-head">
+                        <div>
+                            <span class="project-kicker">Portfolio</span>
+                            <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                            <p style="color: var(--text-dim); max-width: 600px;">Practical applications built to solve real-world problems and improve my technical stack.</p>
+                        </div>
+                    </div>
+                    <div class="project-grid">
+                        <article class="card project-card">
+                            <i class="fas fa-shopping-basket"></i>
+                            <h3 style="margin: 0.5rem 0;">LocalBasket</h3>
+                            <p style="color: var(--text-dim); font-size: 0.95rem;">A web platform designed to streamline local commerce and inventory management.</p>
+                            <div class="tag-list">
+                                <span class="tag">HTML/CSS</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">MySQL</span>
+                            </div>
+                            <a href="https://localbasket.co.in" target="_blank" rel="noopener" class="btn btn-secondary" style="margin-top: 1rem;">Visit Website</a>
+                        </article>
+                        
+                        <article class="card project-card">
+                            <i class="fas fa-chart-pie"></i>
+                            <h3 style="margin: 0.5rem 0;">Vishwakarma Enterprises</h3>
+                            <p style="color: var(--text-dim); font-size: 0.95rem;">An administrative dashboard built for business management and robust record tracking.</p>
+                            <div class="tag-list">
+                                <span class="tag">Web Development</span>
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">Backend Basics</span>
+                            </div>
+                        </article>
+                        
+                        <article class="card project-card">
+                            <i class="fas fa-file-medical"></i>
+                            <h3 style="margin: 0.5rem 0;">A Review on Nutraceuticals</h3>
+                            <p style="color: var(--text-dim); font-size: 0.95rem;">An informative academic review presentation highlighting structured data and research.</p>
+                            <div class="tag-list">
+                                <span class="tag">Research</span>
+                                <span class="tag">Information Architecture</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="education">
+                <div class="container" data-reveal>
+                    <div class="section-head" style="margin-bottom: 2rem;">
+                        <div>
+                            <span class="project-kicker">Academics</span>
+                            <h2 class="section-title">Educational <span class="gradient-text">Background</span></h2>
+                            <p style="color: var(--text-dim); max-width: 600px;">My education has helped build discipline, consistency, and a stronger foundation for software development.</p>
+                        </div>
+                    </div>
+                    <div class="education-grid">
+                        <article class="card education-card">
+                            <span class="mini-metric">Completed 2026</span>
+                            <strong style="display: block; font-size: 1.2rem; margin: 0.5rem 0;">BSc IT</strong>
+                            <p style="color: var(--text-dim); margin: 0; font-size: 0.95rem;">Completed Bachelor of Science in Information Technology with 9.5 CGPA.</p>
+                        </article>
+                        
+                        <article class="card education-card">
+                            <span class="mini-metric">2023</span>
+                            <strong style="display: block; font-size: 1.2rem; margin: 0.5rem 0;">HSC / 12th</strong>
+                            <p style="color: var(--text-dim); margin: 0; font-size: 0.95rem;">Completed Higher Secondary Certificate. Score: 54.17%.</p>
+                        </article>
+                        
+                        <article class="card education-card">
+                            <span class="mini-metric">2021</span>
+                            <strong style="display: block; font-size: 1.2rem; margin: 0.5rem 0;">SSC / 10th</strong>
+                            <p style="color: var(--text-dim); margin: 0; font-size: 0.95rem;">Completed Secondary School Certificate. Score: 62%.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer" style="padding: 3rem 0 2rem; text-align: center; border-top: 1px solid rgba(21, 71, 52, 0.1); margin-top: 2rem;">
+            <div class="container">
+                <a href="#home" class="logo" style="display: inline-block; margin-bottom: 1rem;">SHUBHAM<span>.</span></a>
+                <p style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2026 Shubham Brijesh Vishwakarma. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '100%';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.background = 'rgba(247, 250, 248, 0.98)';
+                navLinks.style.padding = '1.5rem';
+                navLinks.style.borderBottom = '1px solid rgba(21, 71, 52, 0.1)';
+                navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.05)';
+            });
+
+            // Scroll Reveal Animation
+            const reveals = document.querySelectorAll('[data-reveal]');
+            const revealOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealObserver.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>

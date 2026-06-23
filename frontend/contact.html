@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Shubham Vishwakarma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .contact-grid,
+        .contact-methods,
+        .quick-points {
+            display: grid;
+            gap: 1.25rem;
+        }
+
+        .contact-grid {
+            grid-template-columns: 0.9fr 1.1fr;
+            align-items: start;
+            margin-top: 2rem;
+        }
+
+        .contact-panel,
+        .form-card,
+        .method-card,
+        .faq-card {
+            padding: 1.5rem;
+        }
+
+        .contact-panel p,
+        .method-card p,
+        .faq-card p {
+            color: var(--text-dim);
+        }
+
+        .contact-methods {
+            margin-top: 1.5rem;
+        }
+
+        .method-card {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .method-card i,
+        .quick-points i {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 0.15rem;
+        }
+
+        .quick-points {
+            margin-top: 1.5rem;
+        }
+
+        .quick-points div {
+            display: flex;
+            gap: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 0.45rem;
+            color: var(--text-dim);
+            font-size: 0.92rem;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.78);
+            color: var(--text);
+            padding: 0.95rem 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color: rgba(19, 121, 91, 0.75);
+            background: rgba(19, 121, 91, 0.06);
+        }
+
+        .form-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .status-box {
+            margin-top: 1rem;
+            padding: 0.95rem 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .status-box.success {
+            display: block;
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            background: rgba(34, 197, 94, 0.12);
+            color: #166534;
+        }
+
+        .status-box.error {
+            display: block;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            background: rgba(239, 68, 68, 0.12);
+            color: #991b1b;
+        }
+
+        .btn:disabled {
+            opacity: 0.75;
+            cursor: wait;
+            transform: none;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (max-width: 980px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a href="index.html" class="logo">SHUBHAM<span>.</span></a>
+                <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Work</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="section">
+            <div class="container">
+                <p class="eyebrow">Contact me</p>
+                <h1 class="section-title">Let's talk about your <span class="gradient-text">next web project</span></h1>
+                <p class="section-copy">The contact page is now more useful on mobile, includes richer project guidance, and still submits directly to the backend.</p>
+
+                <div class="contact-grid">
+                    <aside class="contact-panel">
+                        <div class="card method-card">
+                            <i class="fas fa-paper-plane"></i>
+                            <div>
+                                <h3>Fast project discussion</h3>
+                                <p>Share your idea, preferred timeline, and what kind of website or feature you need.</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-methods">
+                            <div class="card method-card">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h3>Email</h3>
+                                    <p><a href="mailto:shubhvish9004@gmail.com">shubhvish9004@gmail.com</a></p>
+                                </div>
+                            </div>
+                            <div class="card method-card">
+                                <i class="fab fa-linkedin"></i>
+                                <div>
+                                    <h3>LinkedIn</h3>
+                                    <p><a href="https://www.linkedin.com/in/shubhwithcode" target="_blank" rel="noopener">/shubhwithcode</a></p>
+                                </div>
+                            </div>
+                            <div class="card method-card">
+                                <i class="fab fa-github"></i>
+                                <div>
+                                    <h3>GitHub</h3>
+                                    <p><a href="https://github.com/shubhwithcode" target="_blank" rel="noopener">/shubhwithcode</a></p>
+                                </div>
+                            </div>
+                            <div class="card method-card">
+                                <i class="fas fa-location-dot"></i>
+                                <div>
+                                    <h3>Location</h3>
+                                    <p>Mumbai, Maharashtra</p>
+                                </div>
+                            </div>
+                            <div class="card method-card">
+                                <i class="fas fa-briefcase"></i>
+                                <div>
+                                    <h3>Availability</h3>
+                                    <p>Open for freelance websites, student portfolios, dashboards, and backend integrations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quick-points">
+                            <div><i class="fas fa-circle-check"></i> Mention your project type and deadline</div>
+                            <div><i class="fas fa-circle-check"></i> I usually respond within 24 hours</div>
+                            <div><i class="fas fa-circle-check"></i> You can ask for frontend-only or full-stack work</div>
+                        </div>
+                    </aside>
+
+                    <section>
+                        <form id="contact-form" class="card form-card">
+                            <div class="form-grid">
+                                <div class="field">
+                                    <label for="name">Full Name</label>
+                                    <input id="name" name="name" type="text" placeholder="Your name" required>
+                                </div>
+                                <div class="field">
+                                    <label for="email">Email Address</label>
+                                    <input id="email" name="email" type="email" placeholder="email@example.com" required>
+                                </div>
+                                <div class="field">
+                                    <label for="message">Project Message</label>
+                                    <textarea id="message" name="message" rows="6" placeholder="Tell me what you want to build..." required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-meta">
+                                <span id="char-count">0 / 500 characters</span>
+                                <span>Minimum 10 characters required</span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 1rem;">Send Message</button>
+                            <div id="form-status" class="status-box" aria-live="polite"></div>
+                        </form>
+
+                        <div class="faq-list">
+                            <div class="card faq-card">
+                                <h3>What should you include in the message?</h3>
+                                <p>Briefly mention the project type, features you need, and whether you want only design, only backend, or both.</p>
+                            </div>
+                            <div class="card faq-card">
+                                <h3>Can this portfolio handle real submissions?</h3>
+                                <p>Yes. Messages are validated and stored through the backend contact API.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p>&copy; 2026 Shubham Vishwakarma.</p>
+                <p>Responsive contact page with backend submission support.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/app.js"></script>
+    <script>
+        const form = document.getElementById("contact-form");
+        const submitButton = form.querySelector("button[type='submit']");
+        const statusBox = document.getElementById("form-status");
+        const messageInput = document.getElementById("message");
+        const charCount = document.getElementById("char-count");
+
+        function setStatus(type, message) {
+            statusBox.className = `status-box ${type}`;
+            statusBox.textContent = message;
+        }
+
+        function updateCount() {
+            const length = messageInput.value.length;
+            charCount.textContent = `${length} / 500 characters`;
+        }
+
+        messageInput.addEventListener("input", updateCount);
+        updateCount();
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const payload = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                message: formData.get("message")
+            };
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending...";
+            statusBox.className = "status-box";
+            statusBox.textContent = "";
+
+            try {
+                const response = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || "Unable to send your message right now.");
+                }
+
+                form.reset();
+                updateCount();
+                setStatus("success", result.message);
+            } catch (error) {
+                setStatus("error", error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Send Message";
+            }
+        });
+    </script>
+</body>
+</html>

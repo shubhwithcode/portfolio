@@ -1,0 +1,14 @@
+{
+  "name": "shubham-portfolio-backend",
+  "version": "1.0.0",
+  "description": "Backend server for Shubham's portfolio website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2",
+    "mongoose": "^9.5.0"
+  }
+}
