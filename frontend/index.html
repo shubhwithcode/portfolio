@@ -659,7 +659,7 @@
             font-weight: 600;
         }
 
-        /* --- Code Sprint Game --- */
+        /* --- Debug Dash Game --- */
         .game-section { overflow: hidden; }
         .game-card {
             display: grid;
@@ -685,21 +685,21 @@
         .game-actions .btn-secondary { color: #fff; border: 1px solid rgba(255, 255, 255, 0.38); }
         .game-actions .btn-secondary:hover { border-color: #fff; color: #fff; }
         .game-arena {
-            position: relative; min-height: 255px; overflow: hidden; border-radius: 8px;
+            position: relative; min-height: 255px; padding: 3rem 1rem 1rem; overflow: hidden; border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.18);
             background: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px), rgba(6, 47, 45, 0.48);
             background-size: 28px 28px;
         }
-        .game-arena::before { content: 'CLICK THE SIGNALS'; position: absolute; top: 1rem; left: 1rem; color: rgba(255, 255, 255, 0.35); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; }
-        .game-target {
-            position: absolute; display: none; place-items: center; width: 3.5rem; height: 3.5rem; padding: 0;
-            border: 3px solid #fff; border-radius: 50%; background: var(--accent); color: #fff; cursor: pointer;
-            box-shadow: 0 0 0 7px rgba(232, 93, 63, 0.22), 0 10px 22px rgba(0, 0, 0, 0.25); animation: targetPulse 1s ease-in-out infinite;
-        }
-        .game-target.is-active { display: grid; }
-        .game-target:focus-visible { outline: 3px solid #f3b23c; outline-offset: 4px; }
-        .game-message { position: absolute; right: 1rem; bottom: 0.85rem; left: 1rem; margin: 0; color: rgba(255, 255, 255, 0.86); font-size: 0.86rem; font-weight: 700; text-align: center; }
-        @keyframes targetPulse { 50% { transform: scale(1.08); } }
+        .game-arena::before { content: 'DEBUG DASH'; position: absolute; top: 1rem; left: 1rem; color: rgba(255, 255, 255, 0.35); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; }
+        .game-question { margin: 0 0 0.65rem; color: #d8fff2; font-size: 0.9rem; font-weight: 800; }
+        .game-code { margin: 0 0 0.75rem; padding: 0.8rem; overflow-x: auto; border-radius: 6px; background: rgba(0, 0, 0, 0.28); color: #f9d58a; font: 700 0.8rem/1.55 Consolas, 'Courier New', monospace; white-space: pre-wrap; }
+        .game-options { display: grid; gap: 0.5rem; }
+        .game-option { width: 100%; padding: 0.65rem 0.75rem; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 6px; background: rgba(255, 255, 255, 0.08); color: #fff; cursor: pointer; font: 700 0.82rem 'Plus Jakarta Sans', sans-serif; text-align: left; transition: background 0.2s ease, transform 0.2s ease; }
+        .game-option:hover:not(:disabled) { background: rgba(255, 255, 255, 0.17); transform: translateX(3px); }
+        .game-option:disabled { cursor: default; }
+        .game-option.is-correct { background: #159b6b; border-color: #6cf2be; }
+        .game-option.is-wrong { background: #b8493a; border-color: #ffab9f; }
+        .game-message { margin: 0.75rem 0 0; color: rgba(255, 255, 255, 0.86); font-size: 0.86rem; font-weight: 700; text-align: center; }
 
         /* --- Hover States & Animations --- */
         .card:hover {
@@ -1017,25 +1017,27 @@
                 <div class="container" data-reveal>
                     <div class="card game-card">
                         <div>
-                            <span class="eyebrow"><i class="fas fa-bolt"></i> Quick visitor challenge</span>
-                            <h2>Can you catch every code signal?</h2>
-                            <p class="game-copy">You have 20 seconds. Click each signal as it appears, beat your personal best, and share your score with friends.</p>
+                            <span class="eyebrow"><i class="fas fa-bug"></i> Quick visitor challenge</span>
+                            <h2>Debug Dash: spot the bug.</h2>
+                            <p class="game-copy">You have 30 seconds to solve five real coding puzzles. Every correct answer earns points—then share your developer score with friends.</p>
 
-                            <div class="game-scoreboard" aria-label="Code Sprint score board">
+                            <div class="game-scoreboard" aria-label="Debug Dash score board">
                                 <div><span>Score</span><strong id="game-score">0</strong></div>
-                                <div><span>Time</span><strong id="game-time">20s</strong></div>
+                                <div><span>Time</span><strong id="game-time">30s</strong></div>
                                 <div><span>Best</span><strong id="game-best">0</strong></div>
                             </div>
 
                             <div class="game-actions">
-                                <button class="btn btn-primary" id="game-start" type="button"><i class="fas fa-play"></i> Start Challenge</button>
+                                <button class="btn btn-primary" id="game-start" type="button"><i class="fas fa-play"></i> Start Debug Dash</button>
                                 <button class="btn btn-secondary" id="game-share" type="button" disabled><i class="fas fa-share-nodes"></i> Share Score</button>
                             </div>
                         </div>
 
-                        <div class="game-arena" id="game-arena" aria-label="Code Sprint game area">
-                            <button class="game-target" id="game-target" type="button" aria-label="Catch code signal"><i class="fas fa-code"></i></button>
-                            <p class="game-message" id="game-message" aria-live="polite">Press Start Challenge to play.</p>
+                        <div class="game-arena" id="game-arena" aria-label="Debug Dash game area">
+                            <p class="game-question" id="game-question">Ready to test your bug-hunting skills?</p>
+                            <pre class="game-code" id="game-code">Click “Start Debug Dash” to receive your first challenge.</pre>
+                            <div class="game-options" id="game-options"></div>
+                            <p class="game-message" id="game-message" aria-live="polite">Find the bug, earn your score, and challenge a friend.</p>
                         </div>
                     </div>
                 </div>
@@ -1165,36 +1167,38 @@
                 revealObserver.observe(reveal);
             });
 
-            // Code Sprint Game
+            // Debug Dash Game
             const gameStart = document.querySelector('#game-start');
             const gameShare = document.querySelector('#game-share');
-            const gameTarget = document.querySelector('#game-target');
-            const gameArena = document.querySelector('#game-arena');
+            const gameQuestion = document.querySelector('#game-question');
+            const gameCode = document.querySelector('#game-code');
+            const gameOptions = document.querySelector('#game-options');
             const gameScoreElement = document.querySelector('#game-score');
             const gameTimeElement = document.querySelector('#game-time');
             const gameBestElement = document.querySelector('#game-best');
             const gameMessage = document.querySelector('#game-message');
             let gameScore = 0;
-            let gameTime = 20;
+            let gameTime = 30;
             let gameTimer;
             let gameActive = false;
+            let answerLocked = false;
+            let currentRound = 0;
+            let activeChallenges = [];
             let gameBest = 0;
+            const challenges = [
+                { question: 'What causes the error in this JavaScript?', code: 'const score = 10;\nscore++;', options: ['const cannot be reassigned', 'The semicolon is missing', 'score must be a string'], answer: 0 },
+                { question: 'Spot the bug in this condition.', code: "if (user = 'admin') {\n  showDashboard();\n}", options: ['It assigns instead of compares', 'admin must be uppercase', 'The braces are unnecessary'], answer: 0 },
+                { question: 'Why will this loop go out of bounds?', code: 'for (let i = 0; i <= items.length; i++) {\n  render(items[i]);\n}', options: ['Use i < items.length', 'Start i at 1', 'Remove i++'], answer: 0 },
+                { question: 'What is wrong with this event listener?', code: "button.addEventListener('click', saveForm());", options: ['saveForm runs immediately', 'click needs double quotes', 'button must be const'], answer: 0 },
+                { question: 'Find the syntax error.', code: "console.log('Hello, developer);", options: ['The closing quote is missing', 'console needs capital C', 'log needs a semicolon first'], answer: 0 }
+            ];
 
             try {
-                gameBest = Number(localStorage.getItem('codeSprintBest')) || 0;
+                gameBest = Number(localStorage.getItem('debugDashBest')) || 0;
             } catch (error) {
                 gameBest = 0;
             }
             gameBestElement.textContent = gameBest;
-
-            const moveTarget = () => {
-                const targetSize = 56;
-                const padding = 12;
-                const maxX = Math.max(padding, gameArena.clientWidth - targetSize - padding);
-                const maxY = Math.max(padding, gameArena.clientHeight - targetSize - padding);
-                gameTarget.style.left = (padding + Math.random() * (maxX - padding)) + 'px';
-                gameTarget.style.top = (padding + Math.random() * (maxY - padding)) + 'px';
-            };
 
             const updateGameStats = () => {
                 gameScoreElement.textContent = gameScore;
@@ -1204,35 +1208,81 @@
             const finishGame = () => {
                 clearInterval(gameTimer);
                 gameActive = false;
-                gameTarget.classList.remove('is-active');
                 gameShare.disabled = false;
                 gameStart.innerHTML = '<i class="fas fa-rotate-right"></i> Play Again';
+                gameOptions.innerHTML = '';
+                gameQuestion.textContent = 'Debug Dash complete!';
+                gameCode.textContent = 'Final score: ' + gameScore + ' / ' + (activeChallenges.length * 10);
 
                 if (gameScore > gameBest) {
                     gameBest = gameScore;
                     gameBestElement.textContent = gameBest;
                     try {
-                        localStorage.setItem('codeSprintBest', gameBest);
+                        localStorage.setItem('debugDashBest', gameBest);
                     } catch (error) {
                         // The game works even if the browser blocks storage.
                     }
-                    gameMessage.textContent = 'New personal best! You caught ' + gameScore + ' signals.';
+                    gameMessage.textContent = 'New personal best! You are a sharp bug hunter.';
                 } else {
-                    gameMessage.textContent = 'Time up! You caught ' + gameScore + ' signals. Try again?';
+                    gameMessage.textContent = 'Nice work! Play again and chase your personal best.';
                 }
+            };
+
+            const renderChallenge = () => {
+                const challenge = activeChallenges[currentRound];
+                answerLocked = false;
+                gameQuestion.textContent = 'Challenge ' + (currentRound + 1) + ' of ' + activeChallenges.length + ': ' + challenge.question;
+                gameCode.textContent = challenge.code;
+                gameMessage.textContent = 'Choose the best answer before time runs out.';
+                gameOptions.innerHTML = '';
+
+                challenge.options.forEach((option, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'game-option';
+                    button.type = 'button';
+                    button.textContent = String.fromCharCode(65 + index) + '. ' + option;
+                    button.addEventListener('click', () => chooseAnswer(index, challenge.answer));
+                    gameOptions.appendChild(button);
+                });
+            };
+
+            const chooseAnswer = (selectedIndex, answerIndex) => {
+                if (!gameActive || answerLocked) return;
+                answerLocked = true;
+                const buttons = gameOptions.querySelectorAll('.game-option');
+                buttons.forEach((button, index) => {
+                    button.disabled = true;
+                    if (index === answerIndex) button.classList.add('is-correct');
+                    if (index === selectedIndex && index !== answerIndex) button.classList.add('is-wrong');
+                });
+
+                if (selectedIndex === answerIndex) {
+                    gameScore += 10;
+                    gameScoreElement.textContent = gameScore;
+                    gameMessage.textContent = 'Correct! +10 points.';
+                } else {
+                    gameMessage.textContent = 'Almost! The highlighted answer is the bug.';
+                }
+
+                setTimeout(() => {
+                    if (!gameActive) return;
+                    currentRound += 1;
+                    if (currentRound >= activeChallenges.length) finishGame();
+                    else renderChallenge();
+                }, 900);
             };
 
             gameStart.addEventListener('click', () => {
                 clearInterval(gameTimer);
                 gameScore = 0;
-                gameTime = 20;
+                gameTime = 30;
+                currentRound = 0;
                 gameActive = true;
+                activeChallenges = [...challenges].sort(() => Math.random() - 0.5).slice(0, 5);
                 gameShare.disabled = true;
                 updateGameStats();
-                gameStart.innerHTML = '<i class="fas fa-bolt"></i> Challenge Running';
-                gameMessage.textContent = 'Go! Catch as many signals as you can.';
-                gameTarget.classList.add('is-active');
-                moveTarget();
+                gameStart.innerHTML = '<i class="fas fa-bug"></i> Debugging...';
+                renderChallenge();
 
                 gameTimer = setInterval(() => {
                     gameTime -= 1;
@@ -1241,19 +1291,11 @@
                 }, 1000);
             });
 
-            gameTarget.addEventListener('click', () => {
-                if (!gameActive) return;
-                gameScore += 1;
-                gameScoreElement.textContent = gameScore;
-                gameMessage.textContent = 'Nice! Keep the momentum going.';
-                moveTarget();
-            });
-
             gameShare.addEventListener('click', async () => {
-                const shareText = 'I caught ' + gameScore + ' code signals in Shubham Vishwakarma\'s Code Sprint. Can you beat my score?';
+                const shareText = 'I scored ' + gameScore + '/50 in Shubham Vishwakarma\'s Debug Dash. Can you beat my bug-hunting score?';
                 try {
                     if (navigator.share) {
-                        await navigator.share({ title: 'My Code Sprint Score', text: shareText, url: window.location.href });
+                        await navigator.share({ title: 'My Debug Dash Score', text: shareText, url: window.location.href });
                         gameMessage.textContent = 'Score shared — challenge sent!';
                     } else if (navigator.clipboard) {
                         await navigator.clipboard.writeText(shareText + ' ' + window.location.href);
